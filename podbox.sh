@@ -187,7 +187,7 @@ function gen_podman_options() {
   local session_type=$(echo $XDG_SESSION_TYPE)
 
   podman_options=""
-  podman_options+=" --name $container_name"
+  podman_options+=" --name $container_name --cap-add=SYS_PTRACE"
   podman_options+=" --hostname $box_name"
   podman_options+=" --interactive"
   podman_options+=" --tty"
