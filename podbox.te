@@ -1,0 +1,47 @@
+module podbox 1.0;
+
+require {
+	type usb_device_t;
+	type sysadm_t;
+	class chr_file setattr;
+	type container_t;
+	type staff_t;
+	class unix_stream_socket connectto;
+	type user_tmp_t;
+	class sock_file {write setattr read};
+	class file {read write map};
+	type pulseaudio_t;
+	type container_file_t;
+	type dri_device_t;
+	class chr_file {map open ioctl getattr read write append};
+	type v4l_device_t;
+	class system module_request;
+	type kernel_t;
+	type usb_device_t;
+	type xserver_tmpfs_t;
+	type abrt_t;
+	type sound_device_t;
+}
+
+#container
+
+allow container_t staff_t:unix_stream_socket connectto;
+allow container_t pulseaudio_t:unix_stream_socket connectto;
+allow container_t user_tmp_t:sock_file {write setattr read};
+allow container_t user_tmp_t:file {write map};
+allow container_t dri_device_t:chr_file {ioctl map open getattr read write};
+allow container_t v4l_device_t:chr_file {getattr ioctl map open read write};
+allow container_t usb_device_t:chr_file {getattr append ioctl map write open getattr read};
+allow container_t kernel_t:system module_request;
+allow container_t xserver_tmpfs_t:file write;
+allow container_t sound_device_t:chr_file { ioctl map open read write };
+
+#sysadm
+
+allow sysadm_t usb_device_t:chr_file setattr;
+
+#pulseaudio
+allow pulseaudio_t container_file_t:file { read write };
+
+#abrt
+allow abrt_t dri_device_t:chr_file read;
