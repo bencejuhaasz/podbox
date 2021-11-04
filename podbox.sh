@@ -260,7 +260,7 @@ function gen_podman_options() {
   fi
 
   if [ "${container_params["security"]}" = "off" ]; then
-    podman_options+=" --security-opt label=disable"
+    podman_options+=" --security-opt label=type:container_t"
   elif [ "${container_params["security"]}" = "unconfined" ]; then
     podman_options+=" --security-opt label=disable"
     podman_options+=" --security-opt seccomp=unconfined"
