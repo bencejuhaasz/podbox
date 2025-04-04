@@ -1,0 +1,11 @@
+
+module cont_relabel 1.0;
+
+require {
+	type container_file_t;
+	type staff_t;
+	class dir relabelto;
+}
+
+#============= staff_t ==============
+allow staff_t container_file_t:dir relabelto;

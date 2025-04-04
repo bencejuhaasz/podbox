@@ -1,0 +1,11 @@
+
+module cont_clipb 1.0;
+
+require {
+	type staff_t;
+	type container_t;
+	class fifo_file write;
+}
+
+#============= staff_t ==============
+allow staff_t container_t:fifo_file write;
